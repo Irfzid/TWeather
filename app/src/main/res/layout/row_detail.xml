@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="5dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@color/charcoal"
+        >
+
+        <TextView
+            android:id="@+id/tv_hours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="hour"/>
+
+        <ImageView
+            android:id="@+id/detail_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_dprecip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/white"
+            android:text="precipitation"/>
+
+        <TextView
+            android:id="@+id/tv_dprecip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/white"
+            android:text="0"/>
+
+        <TextView
+            android:id="@+id/tv_dtempc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:text="Temp."/>
+
+        <TextView
+            android:id="@+id/tv_dtempc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:text="0"/>
+
+        <TextView
+            android:id="@+id/tv_dwind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:text="Max Wind"/>
+
+        <TextView
+            android:id="@+id/tv_dwind2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:text="0"/>
+
+        <TextView
+            android:id="@+id/tv_dcondi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="80dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:text="condition"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
