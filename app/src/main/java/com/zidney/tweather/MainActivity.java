@@ -5,13 +5,17 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,10 +48,10 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
 
     TextView temp_c, loct, condt, windkph, precipmm, humidity, cloud,
             gustkph, lastupdate, pressuremb, condtfore, date, avgtemp_c,
-            day, co, o3, no2, so2, pm2_5, pm10, hidate, hitemp, hicondi;
+            day, co, o3, no2, so2, pm2_5, pm10, hidate, hitemp, hicondi, hiday;
     ImageView icon_w, icon_h, iconm1, iconm2, iconm3, iconm4, iconm5, iconm6;
-
-
+    SwipeRefreshLayout refresh_m;
+    LinearLayout error_m;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -66,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
         pressuremb = findViewById(R.id.tv_pressuremb);
         icon_w = findViewById(R.id.image_cond);
         day = findViewById(R.id.tv_day);
+        refresh_m = findViewById(R.id.refresh);
+        error_m = findViewById(R.id.error_warn);
+
         iconm1 = findViewById(R.id.iconm1);
         iconm2 = findViewById(R.id.iconm2);
         iconm3 = findViewById(R.id.iconm3);
@@ -80,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
         pm2_5 = findViewById(R.id.tv_pm252);
         pm10 = findViewById(R.id.tv_pm102);
 
+        hiday = findViewById(R.id.tv_hiday);
         hidate = findViewById(R.id.tv_hidate);
         hitemp = findViewById(R.id.tv_hitemp);
         hicondi = findViewById(R.id.tv_hicondi);
@@ -97,11 +105,31 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
         recyclerView.setLayoutManager(layoutManager);
         mainActivity = this;
 
-
         getCurrentDatafromAPI();
         getHistoryDatafromAPI();
         getForecastDatafromAPI();
 
+        refresh_m.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                RefreshData();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refresh_m.setRefreshing(false); }
+                }, 3000);
+            }
+        });
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void RefreshData() {
+        forecastdays.clear();
+        dayAdapter.Clear();
+        getCurrentDatafromAPI();
+        getHistoryDatafromAPI();
+        getForecastDatafromAPI();
     }
 
     private void getCurrentDatafromAPI() {
@@ -150,15 +178,15 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
                     pm2_5.setText(Float.toString(currentModel.getCurrent().getAir_quality().getPm2_5())+"\nμg/m3");
                     pm10.setText(Float.toString(currentModel.getCurrent().getAir_quality().getPm10())+"\nμg/m3");
 
-
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<CurrentModel> call, Throwable t) {
-                Log.d(TAG,t.toString());
+                refresh_m.setRefreshing(false);
+                Log.d(TAG,"failed to load data");
+                error_m.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -179,7 +207,10 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
                     }
                     @Override
                     public void onFailure(Call<ForecastModel> call, Throwable t) {
-                        Log.d(TAG, t.toString());
+                        refresh_m.setRefreshing(false);
+                        Log.d(TAG,"failed to load data");
+                        error_m.setVisibility(View.VISIBLE);
+
 
                     }
                 });
@@ -198,8 +229,20 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
                     @Override
                     public void onResponse(Call<History> call, Response<History> response) {
                         forecastdays = response.body().getForecast().getForecastday();
-
-                        hidate.setText(forecastdays.get(0).getDate());
+                        DateFormat fromAPIH = new SimpleDateFormat("yyyy-MM-dd");
+                        DateFormat myHFormat = new SimpleDateFormat("EEEE");
+                        DateFormat myDFormat = new SimpleDateFormat("dd MMM yyyy");
+                        String dateformat = forecastdays.get(0).getDate();
+                        String hday = null;
+                        String dday = null;
+                        try {
+                            hday = myHFormat.format(fromAPIH.parse(dateformat));
+                            dday = myDFormat.format(fromAPIH.parse(dateformat));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        hiday.setText(hday);
+                        hidate.setText(dday);
                         hitemp.setText(Double.toString(forecastdays.get(0).getDay().getAvgtemp_c())+" ℃");
                         hicondi.setText(forecastdays.get(0).getDay().getCondition().getText());
                         Glide.with(MainActivity.this)
@@ -210,7 +253,9 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
 
                     @Override
                     public void onFailure(Call<History> call, Throwable t) {
-
+                        refresh_m.setRefreshing(false);
+                        Log.d(TAG,"failed to load data");
+                        error_m.setVisibility(View.VISIBLE);
                     }
                 });
     }

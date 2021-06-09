@@ -94,4 +94,8 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder> {
     public interface OnDayListener{
         void onDayClick(int position);
     }
+
+    public void Clear(){
+        Dlist.clear();
+    }
 }

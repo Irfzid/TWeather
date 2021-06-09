@@ -9,17 +9,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="325dp">
+        android:layout_height="270dp">
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="27dp"
+            android:layout_marginLeft="20dp"/>
 
         <TextView
             android:id="@+id/tv_daycond"
@@ -27,27 +27,27 @@
             android:layout_height="wrap_content"
             android:text="condition"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="@color/white"
             android:layout_marginTop="150dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_marginLeft="135dp"/>
 
         <ImageView
             android:id="@+id/image_cond2"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="165dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tv_maxtemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Max temp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="210dp"/>
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="110dp"
+            android:text="Max Temp"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_maxtemp2"
@@ -55,8 +55,8 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textColor="@color/white"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="210dp"/>
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="110dp"/>
 
         <TextView
             android:id="@+id/tv_mintemp"
@@ -64,8 +64,8 @@
             android:layout_height="wrap_content"
             android:text="Min Temp"
             android:textColor="@color/white"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="290dp"/>
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="130dp"/>
 
         <TextView
             android:id="@+id/tv_mintemp2"
@@ -73,17 +73,17 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textColor="@color/white"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="290dp"/>
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="130dp"/>
 
         <TextView
             android:id="@+id/tv_totprec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Precip"
+            android:text="Preciption"
             android:textColor="@color/white"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="250dp"/>
+            android:layout_marginLeft="226dp"
+            android:layout_marginTop="190dp"/>
 
         <TextView
             android:id="@+id/tv_totprec2"
@@ -91,35 +91,77 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textColor="@color/white"
-            android:layout_marginLeft="310dp"
-            android:layout_marginTop="250dp"/>
+            android:layout_marginLeft="236dp"
+            android:layout_marginTop="240dp"/>
+
+        <ImageView
+            android:id="@+id/icon_prec"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="236dp"
+            android:layout_marginTop="210dp"
+            android:src="@color/white"/>
 
         <TextView
-            android:id="@+id/tv_avtemp"
+            android:id="@+id/tv_avghumidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Avg Temp"
+            android:text="Humidity"
             android:textColor="@color/white"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="250dp"/>
+            android:layout_marginLeft="29dp"
+            android:layout_marginTop="190dp"/>
+
+        <ImageView
+            android:id="@+id/icon_hum"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="210dp"
+            android:src="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_avghumidity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="240dp"
+            android:text="0"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_avtemp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="00.0℃"
             android:textColor="@color/white"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="250dp"/>
+            android:textSize="45sp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="55dp"/>
+
+        <ImageView
+            android:id="@+id/icon_cel"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="275dp"
+            android:layout_marginTop="70dp"
+            android:src="@color/white"/>
 
         <TextView
             android:id="@+id/tv_maxwind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wind Speed"
+            android:text="Wind"
             android:textColor="@color/white"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="210dp"/>
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="190dp"/>
+
+        <ImageView
+            android:id="@+id/icon_wind"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="126dp"
+            android:layout_marginTop="210dp"
+            android:src="@color/white"/>
 
         <TextView
             android:id="@+id/tv_maxwind2"
@@ -127,8 +169,36 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textColor="@color/white"
-            android:layout_marginLeft="310dp"
-            android:layout_marginTop="210dp"/>
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="240dp"/>
+
+        <TextView
+            android:id="@+id/tv_uv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UV"
+            android:textColor="@color/white"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="190dp"/>
+
+        <ImageView
+            android:id="@+id/icon_uv"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="326dp"
+            android:layout_marginTop="210dp"
+            android:src="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_uv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/white"
+            android:layout_marginLeft="330dp"
+            android:layout_marginTop="240dp"/>
+
+
 
     </RelativeLayout>
 
@@ -136,7 +206,7 @@
         android:id="@+id/fcastdetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="325dp"
+        android:layout_marginTop="270dp"
         tools:listitem="@layout/row_detail" />
 
 

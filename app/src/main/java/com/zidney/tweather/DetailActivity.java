@@ -31,8 +31,9 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<Hour> hourList = new ArrayList<>();
 
-    TextView tvMaxt, tvMint, tvAvgt, tvdaycond, tvdate, tvwind, tvtotprecip;
-    ImageView imagecon;
+    TextView tvMaxt, tvMint, tvAvgt, tvdaycond, tvdate, tvwind,
+            tvtotprecip, tvhumi, tvuv;
+    ImageView imagecon, icon_c, icon_hum, icon_wind, icon_uv, icon_preci;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,19 @@ public class DetailActivity extends AppCompatActivity {
         tvdaycond = findViewById(R.id.tv_daycond);
         tvwind = findViewById(R.id.tv_maxwind2);
         tvtotprecip = findViewById(R.id.tv_totprec2);
+        tvhumi = findViewById(R.id.tv_avghumidity2);
+        tvuv = findViewById(R.id.tv_uv2);
         imagecon = findViewById(R.id.image_cond2);
+        icon_c = findViewById(R.id.icon_cel);
+        icon_hum = findViewById(R.id.icon_hum);
+        icon_wind = findViewById(R.id.icon_wind);
+        icon_uv = findViewById(R.id.icon_uv);
+        icon_preci = findViewById(R.id.icon_prec);
 
         //change date format
         String datedetail = forecastday.getDate();
         SimpleDateFormat fromAPIde = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat myformatde = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat myformatde = new SimpleDateFormat("EEE, dd MMM yyyy");
         String reformatde = null;
 
         try {
@@ -65,11 +73,19 @@ public class DetailActivity extends AppCompatActivity {
         tvMint.setText(Double.toString(forecastday.getDay().getMintemp_c())+"℃");
         tvAvgt.setText(Double.toString(forecastday.getDay().getAvgtemp_c())+"℃");
         tvdaycond.setText(forecastday.getDay().getCondition().getText());
-        tvwind.setText(Double.toString(forecastday.getDay().getMaxwind_kph())+"kph");
-        tvtotprecip.setText(Double.toString(forecastday.getDay().getTotalprecip_mm())+"mm");
+        tvwind.setText(Double.toString(forecastday.getDay().getMaxwind_kph())+" kph");
+        tvtotprecip.setText(Double.toString(forecastday.getDay().getTotalprecip_mm())+" mm");
         Glide.with(DetailActivity.this)
                 .load("http:" + forecastday.getDay().getCondition().getIcon())
                 .into(imagecon);
+        icon_c.setImageResource(R.drawable.thermometer);
+        icon_wind.setImageResource(R.drawable.wind);
+        icon_preci.setImageResource(R.drawable.precipitation);
+        icon_hum.setImageResource(R.drawable.humidity);
+        icon_uv.setImageResource(R.drawable.ultraviolet);
+
+        tvhumi.setText(Integer.toString(forecastday.getDay().getAvghumidity())+"%");
+        tvuv.setText(Double.toString(forecastday.getDay().getUv()));
 
         hourview = findViewById(R.id.fcastdetail);
         layoutManager = new LinearLayoutManager(this);

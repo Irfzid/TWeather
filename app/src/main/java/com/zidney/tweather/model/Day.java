@@ -10,6 +10,8 @@ public class Day implements Parcelable {
     private double avgtemp_c;
     private double maxwind_kph;
     private double totalprecip_mm;
+    private int avghumidity;
+    private double uv;
     private Condition condition;
 
     public double getMaxtemp_c() {
@@ -60,6 +62,22 @@ public class Day implements Parcelable {
         this.condition = condition;
     }
 
+    public int getAvghumidity() {
+        return avghumidity;
+    }
+
+    public void setAvghumidity(int avghumidity) {
+        this.avghumidity = avghumidity;
+    }
+
+    public double getUv() {
+        return uv;
+    }
+
+    public void setUv(double uv) {
+        this.uv = uv;
+    }
+
 
     @Override
     public int describeContents() {
@@ -73,6 +91,8 @@ public class Day implements Parcelable {
         dest.writeDouble(this.avgtemp_c);
         dest.writeDouble(this.maxwind_kph);
         dest.writeDouble(this.totalprecip_mm);
+        dest.writeInt(this.avghumidity);
+        dest.writeDouble(this.uv);
         dest.writeParcelable(this.condition, flags);
     }
 
@@ -82,6 +102,8 @@ public class Day implements Parcelable {
         this.avgtemp_c = source.readDouble();
         this.maxwind_kph = source.readDouble();
         this.totalprecip_mm = source.readDouble();
+        this.avghumidity = source.readInt();
+        this.uv = source.readDouble();
         this.condition = source.readParcelable(Condition.class.getClassLoader());
     }
 
@@ -94,6 +116,8 @@ public class Day implements Parcelable {
         this.avgtemp_c = in.readDouble();
         this.maxwind_kph = in.readDouble();
         this.totalprecip_mm = in.readDouble();
+        this.avghumidity = in.readInt();
+        this.uv = in.readDouble();
         this.condition = in.readParcelable(Condition.class.getClassLoader());
     }
 
