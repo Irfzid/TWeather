@@ -41,14 +41,13 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayListener {
     private final String TAG = "MainActivity";
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter recadapter;
     private DayAdapter dayAdapter;
     private List<Forecastday> forecastdays = new ArrayList<>();
     private static MainActivity mainActivity;
 
     TextView temp_c, loct, condt, windkph, precipmm, humidity, cloud,
-            gustkph, lastupdate, pressuremb, condtfore, date, avgtemp_c,
-            day, co, o3, no2, so2, pm2_5, pm10, hidate, hitemp, hicondi, hiday;
+            gustkph, lastupdate, pressuremb, day, co, o3, no2, so2,
+            pm2_5, pm10, hidate, hitemp, hicondi, hiday;
     ImageView icon_w, icon_h, iconm1, iconm2, iconm3, iconm4, iconm5, iconm6;
     SwipeRefreshLayout refresh_m;
     LinearLayout error_m;

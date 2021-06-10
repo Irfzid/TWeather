@@ -26,7 +26,7 @@
             android:id="@+id/detail_image"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:src="@mipmap/ic_launcher"/>
 
@@ -34,7 +34,7 @@
             android:id="@+id/tv_dprecip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="60dp"
             android:textColor="@color/white"
             android:text="precipitation"/>
@@ -43,7 +43,7 @@
             android:id="@+id/tv_dprecip2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="290dp"
             android:layout_marginTop="60dp"
             android:textColor="@color/white"
             android:text="0"/>
@@ -52,7 +52,7 @@
             android:id="@+id/tv_dtempc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:text="Temp."/>
@@ -61,7 +61,7 @@
             android:id="@+id/tv_dtempc2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="290dp"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
             android:text="0"/>
@@ -70,7 +70,7 @@
             android:id="@+id/tv_dwind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="40dp"
             android:textColor="@color/white"
             android:text="Max Wind"/>
@@ -79,7 +79,7 @@
             android:id="@+id/tv_dwind2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="290dp"
             android:layout_marginTop="40dp"
             android:textColor="@color/white"
             android:text="0"/>
@@ -88,7 +88,7 @@
             android:id="@+id/tv_dcondi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="80dp"
             android:textAlignment="center"
             android:textColor="@color/white"

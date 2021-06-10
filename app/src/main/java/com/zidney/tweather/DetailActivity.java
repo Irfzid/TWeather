@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,12 +18,10 @@ import com.zidney.tweather.model.Hour;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
     private RecyclerView hourview;
-    private RecyclerView.Adapter detailapater;
     private DayDetailAdapter dayDetailAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Hour> hourList = new ArrayList<>();

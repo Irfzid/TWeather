@@ -15,9 +15,8 @@ import com.zidney.tweather.model.Forecastday;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder> {
 
