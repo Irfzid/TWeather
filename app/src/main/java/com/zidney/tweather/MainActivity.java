@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
                     @Override
                     public void run() {
                         refresh_m.setRefreshing(false); }
-                }, 3000);
+                }, 4000);
             }
         });
 
@@ -135,63 +135,61 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
         ApiService.endpoint().getCurrent()
                 .enqueue(new Callback<CurrentModel>() {
 
-            @Override
-            public void onResponse(Call<CurrentModel> call, Response<CurrentModel> response) {
-                if (response.isSuccessful()) {
+                    @Override
+                    public void onResponse(Call<CurrentModel> call, Response<CurrentModel> response) {
+                        if (response.isSuccessful()) {
 
-                    CurrentModel currentModel = response.body();
-                    String daycurrent = currentModel.getCurrent().getLast_updated();
-                    SimpleDateFormat fromAPI = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    SimpleDateFormat myformat = new SimpleDateFormat("HH:mm, dd MMM yyyy");
-                    SimpleDateFormat dayformat = new SimpleDateFormat("EEEE");
-                    String reformat = null;
-                    String reformat2 = null;
-                    try {
-                        reformat = dayformat.format(fromAPI.parse(daycurrent));
-                        reformat2 = myformat.format(fromAPI.parse(daycurrent));
+                            CurrentModel currentModel = response.body();
+                            String daycurrent = currentModel.getCurrent().getLast_updated();
+                            SimpleDateFormat fromAPI = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                            SimpleDateFormat myformat = new SimpleDateFormat("HH:mm, dd MMM yyyy");
+                            SimpleDateFormat dayformat = new SimpleDateFormat("EEEE");
+                            String reformat = null;
+                            String reformat2 = null;
+                            try {
+                                reformat = dayformat.format(fromAPI.parse(daycurrent));
+                                reformat2 = myformat.format(fromAPI.parse(daycurrent));
 
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            day.setText(reformat);
+
+                            Glide.with(MainActivity.this)
+                                    .load("http:" + currentModel.getCurrent().getCondition().getIcon())
+                                    .into(icon_w);
+                            temp_c.setText(Double.toString(currentModel.getCurrent().getTemp_c())+"℃");
+                            condt.setText(currentModel.getCurrent().getCondition().getText());
+                            humidity.setText(Integer.toString(currentModel.getCurrent().getHumidity()) + "%");
+                            precipmm.setText(Double.toString(currentModel.getCurrent().getPrecip_mm()) + "mm");
+                            cloud.setText(Integer.toString(currentModel.getCurrent().getCloud()) + "%");
+                            lastupdate.setText(reformat2);
+                            pressuremb.setText(Double.toString(currentModel.getCurrent().getPressure_mb()) + "mb");
+                            windkph.setText(Double.toString(currentModel.getCurrent().getWind_kph()) + "kph");
+                            gustkph.setText(Double.toString(currentModel.getCurrent().getGust_kph()) + "kph");
+                            loct.setText(response.body().getLocation().getName());
+
+                            //Air Quality
+                            co.setText(Float.toString(currentModel.getCurrent().getAir_quality().getCo())+"\nμg/m3");
+                            o3.setText(Float.toString(currentModel.getCurrent().getAir_quality().getO3())+"\nμg/m3");
+                            no2.setText(Float.toString(currentModel.getCurrent().getAir_quality().getNo2())+"\nμg/m3");
+                            so2.setText(Float.toString(currentModel.getCurrent().getAir_quality().getSo2())+"\nμg/m3");
+                            pm2_5.setText(Float.toString(currentModel.getCurrent().getAir_quality().getPm2_5())+"\nμg/m3");
+                            pm10.setText(Float.toString(currentModel.getCurrent().getAir_quality().getPm10())+"\nμg/m3");
+                            error_m.setVisibility(View.GONE);
+                        }
                     }
-                    day.setText(reformat);
 
-                    Glide.with(MainActivity.this)
-                            .load("http:" + currentModel.getCurrent().getCondition().getIcon())
-                            .into(icon_w);
-                    temp_c.setText(Double.toString(currentModel.getCurrent().getTemp_c())+"℃");
-                    condt.setText(currentModel.getCurrent().getCondition().getText());
-                    humidity.setText(Integer.toString(currentModel.getCurrent().getHumidity()) + "%");
-                    precipmm.setText(Double.toString(currentModel.getCurrent().getPrecip_mm()) + " mm");
-                    cloud.setText(Integer.toString(currentModel.getCurrent().getCloud()) + "%");
-                    lastupdate.setText(reformat2);
-                    pressuremb.setText(Double.toString(currentModel.getCurrent().getPressure_mb()) + " mb");
-                    windkph.setText(Double.toString(currentModel.getCurrent().getWind_kph()) + " kph");
-                    gustkph.setText(Double.toString(currentModel.getCurrent().getGust_kph()) + " kph");
-                    loct.setText(response.body().getLocation().getName());
+                    @Override
+                    public void onFailure(Call<CurrentModel> call, Throwable t) {
+                        //refresh_m.setRefreshing(false);
+                        Log.d(TAG,"failed to load data");
+                        error_m.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
 
-                    //Air Quality
-                    co.setText(Float.toString(currentModel.getCurrent().getAir_quality().getCo())+"\nμg/m3");
-                    o3.setText(Float.toString(currentModel.getCurrent().getAir_quality().getO3())+"\nμg/m3");
-                    no2.setText(Float.toString(currentModel.getCurrent().getAir_quality().getNo2())+"\nμg/m3");
-                    so2.setText(Float.toString(currentModel.getCurrent().getAir_quality().getSo2())+"\nμg/m3");
-                    pm2_5.setText(Float.toString(currentModel.getCurrent().getAir_quality().getPm2_5())+"\nμg/m3");
-                    pm10.setText(Float.toString(currentModel.getCurrent().getAir_quality().getPm10())+"\nμg/m3");
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CurrentModel> call, Throwable t) {
-                refresh_m.setRefreshing(false);
-                Log.d(TAG,"failed to load data");
-                error_m.setVisibility(View.VISIBLE);
-
-
-            }
-        });
-        }
-
-        public void getForecastDatafromAPI(){
+    public void getForecastDatafromAPI(){
         ApiService.endpoint().getForecast()
                 .enqueue(new Callback<ForecastModel>() {
                     @Override
@@ -202,18 +200,17 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
                             forecastdays = response.body().getForecast().getForecastday();
                             dayAdapter = new DayAdapter(forecastdays, mainActivity);
                             recyclerView.setAdapter(dayAdapter);
+                            error_m.setVisibility(View.GONE);
                         }
                     }
                     @Override
                     public void onFailure(Call<ForecastModel> call, Throwable t) {
-                        refresh_m.setRefreshing(false);
+                        //refresh_m.setRefreshing(false);
                         Log.d(TAG,"failed to load data");
                         error_m.setVisibility(View.VISIBLE);
-
-
                     }
                 });
-        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void getHistoryDatafromAPI(){
@@ -247,12 +244,12 @@ public class MainActivity extends AppCompatActivity implements DayAdapter.OnDayL
                         Glide.with(MainActivity.this)
                                 .load("http:" + forecastdays.get(0).getDay().getCondition().getIcon())
                                 .into(icon_h);
-
+                        error_m.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(Call<History> call, Throwable t) {
-                        refresh_m.setRefreshing(false);
+                        //refresh_m.setRefreshing(false);
                         Log.d(TAG,"failed to load data");
                         error_m.setVisibility(View.VISIBLE);
                     }
